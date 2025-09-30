@@ -311,11 +311,11 @@
                     messageDiv.style.animationDelay = (messageIndex * 0.5) + 's';
                     messagesContainer.appendChild(messageDiv);
                     messageIndex++;
-                    setTimeout(displayNextMessage, 3000);
+                    setTimeout(displayNextMessage, 1000);
                 }
             }
 
-            setTimeout(displayNextMessage, 2000);
+            setTimeout(displayNextMessage, 1000);
         }
 
         // Add some romantic music (optional - uncomment if you want audio)
@@ -327,8 +327,8 @@
             audio.play().catch(e => console.log('Audio play failed:', e));
         }
         
-        // Call this in yesClicked() if you want music
-        // playRomanticMusic();
+         Call this in yesClicked() if you want music
+         playRomanticMusic();
         
     </script>
 </body>
