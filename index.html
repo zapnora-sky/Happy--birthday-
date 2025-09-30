@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Esther</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .welcome-screen h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            padding: 15px 40px;
+            margin: 10px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cake Animation */
+        .cake-container {
+            position: relative;
+            margin: 50px 0;
+        }
+
+        .cake {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            animation: bakeCake 2s ease-in-out;
+        }
+
+        .cake::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            right: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #ffd166, #ffef9f);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .candle {
+            width: 6px;
+            height: 30px;
+            background: #fff;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: lightCandle 1s ease-in-out 2s forwards;
+        }
+
+        .flame {
+            width: 12px;
+            height: 20px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: flicker 0.5s ease-in-out 2.5s infinite alternate;
+        }
+
+        /* Hearts Animation */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+        }
+
+        /* Messages */
+        .messages {
+            margin-top: 40px;
+            font-size: 1.3em;
+            line-height: 1.6;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 4s forwards;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideIn 1s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes bakeCake {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        @keyframes lightCandle {
+            0% { height: 0; opacity: 0; }
+            100% { height: 30px; opacity: 1; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none;
+        }
+
+        /* Romantic background elements */
+        .romantic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="romantic-bg"></div>
+    <div class="hearts" id="heartsContainer"></div>
+    
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <h1>Are you Esther?</h1>
+            <button class="btn" onclick="yesClicked()">Yes</button>
+            <button class="btn" onclick="noClicked()">No</button>
+        </div>
+
+        <!-- Access Denied -->
+        <div class="welcome-screen hidden" id="accessDenied">
+            <h1>Sorry, only Esther can access this special content</h1>
+            <button class="btn" onclick="goBack()">Go Back</button>
+        </div>
+
+        <!-- Birthday Content -->
+        <div class="hidden" id="birthdayContent">
+            <!-- Cake Animation -->
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Birthday Message -->
+            <h1 style="font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">
+                Happy Birthday Esther! 🎉
+            </h1>
+
+            <!-- Lovely Messages -->
+            <div class="messages" id="messagesContainer">
+                <!-- Messages will be added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lovely messages for Esther
+        const messages = [
+            "Every moment with you feels like a beautiful dream come true...",
+            "Your smile lights up my world brighter than a thousand stars...",
+            "your an  amazing person I've come to know, inside and out...",
+            "My love for you grows stronger with each passing day...",
+            "You make every day feel like a celebration...",
+            "Thank you for being you - perfect in every way...",
+            "I'm quite Lucky to have you in my life...",
+            "Your happiness means everything to me...",
+            "May this year bring you all the joy and love you deserve...",
+            "I cherish every memory we've created together...",
+            "You are my today and all of my tomorrows...",
+            "Happy Birthday to my one and only baddie! 🎂"
+        ];
+
+        function yesClicked() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('birthdayContent').classList.remove('hidden');
+            createHearts();
+            startMessageDisplay();
+        }
+
+        function noClicked() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('accessDenied').classList.remove('hidden');
+        }
+
+        function goBack() {
+            document.getElementById('accessDenied').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞'];
+            
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        function startMessageDisplay() {
+            const messagesContainer = document.getElementById('messagesContainer');
+            let messageIndex = 0;
+
+            function displayNextMessage() {
+                if (messageIndex < messages.length) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'message';
+                    messageDiv.textContent = messages[messageIndex];
+                    messageDiv.style.animationDelay = (messageIndex * 0.5) + 's';
+                    messagesContainer.appendChild(messageDiv);
+                    messageIndex++;
+                    setTimeout(displayNextMessage, 3000);
+                }
+            }
+
+            setTimeout(displayNextMessage, 2000);
+        }
+
+        // Add some romantic music (optional - uncomment if you want audio)
+        
+        function playRomanticMusic() {
+            const audio = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAABAAACcQCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAABQTEFNRTMuMTAwBKkAAAAAAAAAADUgJAOHQQAB9AAACHDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//tQxAAAAAAAAAAAAAAAAAAAAAAA');
+            audio.loop = true;
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+        }
+        
+        // Call this in yesClicked() if you want music
+        // playRomanticMusic();
+        
+    </script>
+</body>
+</html>
