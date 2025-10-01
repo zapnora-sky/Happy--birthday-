@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Esther</title>
+    <title>A Special Birthday for Esther</title>
     <style>
         * {
             margin: 0;
@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0c0c2e 0%, #1a1a4b 50%, #2d1b69 100%);
             min-height: 100vh;
             overflow: hidden;
             color: white;
@@ -27,91 +27,319 @@
             min-height: 100vh;
             text-align: center;
             padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Music Controls */
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         /* Welcome Screen */
         .welcome-screen {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
+            to { box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3); }
         }
 
         .welcome-screen h1 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffd166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .btn {
-            padding: 15px 40px;
-            margin: 10px;
-            font-size: 1.2em;
+            padding: 18px 50px;
+            margin: 15px;
+            font-size: 1.3em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
         }
 
-        /* Cake Animation */
-        .cake-container {
+        /* Night Sky */
+        .night-sky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Tree with Lights */
+        .tree-scene {
             position: relative;
             margin: 50px 0;
         }
 
-        .cake {
+        .tree {
+            position: relative;
             width: 200px;
-            height: 100px;
+            height: 300px;
+        }
+
+        .tree-trunk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 80px;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            border-radius: 5px;
+        }
+
+        .tree-top {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 200px solid #2d5a27;
+            filter: drop-shadow(0 0 10px rgba(45, 90, 39, 0.5));
+        }
+
+        .tree-top::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: -80px;
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 150px solid #3a6b32;
+        }
+
+        .light {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: lightTwinkle 2s infinite;
+        }
+
+        @keyframes lightTwinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Picnic Mat */
+        .picnic-mat {
+            position: absolute;
+            bottom: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 120px;
+            background: linear-gradient(45deg, #dc143c, #ff69b4);
+            border-radius: 10px;
+            opacity: 0;
+            animation: unfoldMat 1s ease-out 0.5s forwards;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .picnic-mat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 49%, white 49%, white 51%, transparent 51%),
+                linear-gradient(transparent 49%, white 49%, white 51%, transparent 51%);
+            border-radius: 10px;
+            opacity: 0.3;
+        }
+
+        @keyframes unfoldMat {
+            0% { transform: translateX(-50%) scale(0) rotate(180deg); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1) rotate(0); opacity: 1; }
+        }
+
+        /* Cake Making Animation */
+        .cake-making-scene {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 80px;
+        }
+
+        .cake-layer {
+            position: absolute;
+            border-radius: 5px;
+            opacity: 0;
+            animation: buildCake 0.5s ease-out forwards;
+        }
+
+        .layer-1 { 
+            bottom: 0; 
+            left: 20px; 
+            width: 80px; 
+            height: 20px; 
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            animation-delay: 1s;
+        }
+        .layer-2 { 
+            bottom: 20px; 
+            left: 15px; 
+            width: 90px; 
+            height: 18px; 
+            background: linear-gradient(45deg, #ffd166, #ffef9f);
+            animation-delay: 1.5s;
+        }
+        .layer-3 { 
+            bottom: 38px; 
+            left: 25px; 
+            width: 70px; 
+            height: 15px; 
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            animation-delay: 2s;
+        }
+        .layer-4 { 
+            bottom: 53px; 
+            left: 30px; 
+            width: 60px; 
+            height: 12px; 
+            background: linear-gradient(45deg, #ffd166, #ffef9f);
+            animation-delay: 2.5s;
+        }
+
+        @keyframes buildCake {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Final Cake */
+        .final-cake {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: revealCake 1s ease-out 3s forwards;
+        }
+
+        .cake {
+            width: 120px;
+            height: 65px;
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             border-radius: 10px 10px 0 0;
             position: relative;
-            animation: bakeCake 2s ease-in-out;
         }
 
         .cake::before {
             content: '';
             position: absolute;
-            top: -20px;
-            left: 20px;
-            right: 20px;
-            height: 20px;
+            top: -15px;
+            left: 10px;
+            right: 10px;
+            height: 15px;
             background: linear-gradient(45deg, #ffd166, #ffef9f);
             border-radius: 10px 10px 0 0;
         }
 
         .candle {
-            width: 6px;
-            height: 30px;
+            width: 4px;
+            height: 25px;
             background: #fff;
             position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: lightCandle 1s ease-in-out 2s forwards;
-        }
-
-        .flame {
-            width: 12px;
-            height: 20px;
-            background: linear-gradient(45deg, #ffd700, #ff6b6b);
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -20px;
+            top: -40px;
             left: 50%;
             transform: translateX(-50%);
             opacity: 0;
-            animation: flicker 0.5s ease-in-out 2.5s infinite alternate;
+            animation: lightCandle 0.5s ease-out 4s forwards;
+        }
+
+        .flame {
+            width: 8px;
+            height: 15px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: flicker 0.3s ease-in-out 4.5s infinite alternate;
+            filter: blur(1px);
+        }
+
+        @keyframes revealCake {
+            to { opacity: 1; }
+        }
+
+        @keyframes lightCandle {
+            to { opacity: 1; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.1) translateX(1px); opacity: 0.9; }
         }
 
         /* Hearts Animation */
@@ -122,66 +350,54 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 3;
         }
 
         .heart {
             position: absolute;
-            font-size: 20px;
+            font-size: 24px;
             opacity: 0;
-            animation: float 6s ease-in infinite;
-        }
-
-        /* Messages */
-        .messages {
-            margin-top: 40px;
-            font-size: 1.3em;
-            line-height: 1.6;
-            max-width: 600px;
-            opacity: 0;
-            animation: fadeIn 2s ease-in-out 4s forwards;
-        }
-
-        .message {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: slideIn 1s ease-in-out;
-        }
-
-        /* Animations */
-        @keyframes bakeCake {
-            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-            100% { transform: scale(1) rotate(0); opacity: 1; }
-        }
-
-        @keyframes lightCandle {
-            0% { height: 0; opacity: 0; }
-            100% { height: 30px; opacity: 1; }
-        }
-
-        @keyframes flicker {
-            0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
-            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+            animation: float 8s ease-in infinite;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
+            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: scale(1); }
             90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-100px) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        @keyframes fadeIn {
+        /* Messages */
+        .messages-container {
+            margin-top: 60px;
+            max-width: 700px;
+            opacity: 0;
+            animation: fadeInMessages 2s ease-in-out 5s forwards;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.4em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInMessage 1s ease-out forwards;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInMessages {
             to { opacity: 1; }
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes slideInMessage {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Hidden class */
@@ -189,89 +405,268 @@
             display: none;
         }
 
-        /* Romantic background elements */
-        .romantic-bg {
+        /* Fireflies */
+        .fireflies {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        @keyframes bgPulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
+        .firefly {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: fly 15s infinite linear;
+        }
+
+        @keyframes fly {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(100px, -100px) scale(0); opacity: 0; }
+        }
+
+        /* Music Visualizer */
+        .visualizer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3px;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .bar {
+            width: 4px;
+            background: linear-gradient(to top, #ff6b6b, #ff8e8e, #ffd166);
+            border-radius: 2px 2px 0 0;
+            animation: visualizer 1.5s ease-in-out infinite;
+        }
+
+        @keyframes visualizer {
+            0%, 100% { height: 10px; }
+            50% { height: 60px; }
         }
     </style>
 </head>
 <body>
-    <div class="romantic-bg"></div>
+    <!-- Music Controls -->
+    <div class="music-controls">
+        <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 Play Music</button>
+    </div>
+
+    <div class="night-sky" id="nightSky"></div>
+    <div class="fireflies" id="fireflies"></div>
     <div class="hearts" id="heartsContainer"></div>
+    <div class="visualizer" id="visualizer"></div>
     
     <div class="container">
         <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
-            <h1>Are you Esther?</h1>
-            <button class="btn" onclick="yesClicked()">Yes</button>
+            <h1>Are you my beautiful Esther? 💖</h1>
+            <button class="btn" onclick="yesClicked()">Yes, it's me!</button>
             <button class="btn" onclick="noClicked()">No</button>
         </div>
 
         <!-- Access Denied -->
         <div class="welcome-screen hidden" id="accessDenied">
-            <h1>Sorry, only Esther can access this special content</h1>
+            <h1>This special message is only for my beloved Esther 💕</h1>
             <button class="btn" onclick="goBack()">Go Back</button>
         </div>
 
         <!-- Birthday Content -->
         <div class="hidden" id="birthdayContent">
-            <!-- Cake Animation -->
-            <div class="cake-container">
-                <div class="cake">
-                    <div class="candle">
-                        <div class="flame"></div>
+            <!-- Tree Scene -->
+            <div class="tree-scene">
+                <div class="tree">
+                    <div class="tree-trunk"></div>
+                    <div class="tree-top"></div>
+                    <div class="picnic-mat"></div>
+                    
+                    <!-- Cake Making Process -->
+                    <div class="cake-making-scene">
+                        <div class="cake-layer layer-1"></div>
+                        <div class="cake-layer layer-2"></div>
+                        <div class="cake-layer layer-3"></div>
+                        <div class="cake-layer layer-4"></div>
+                    </div>
+                    
+                    <!-- Final Cake -->
+                    <div class="final-cake">
+                        <div class="cake">
+                            <div class="candle">
+                                <div class="flame"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Birthday Message -->
-            <h1 style="font-size: 3em; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3);">
-                Happy Birthday Esther! 🎉
+            <h1 style="font-size: 3.5em; margin: 30px 0; text-shadow: 0 0 30px rgba(255,105,180,0.7); background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffd166); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Happy Birthday Esther! 🌸
             </h1>
 
             <!-- Lovely Messages -->
-            <div class="messages" id="messagesContainer">
-                <!-- Messages will be added here by JavaScript -->
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will be added here -->
             </div>
         </div>
     </div>
 
     <script>
-        // Lovely messages for Esther
-        const messages = [
-            "Every moment with you feels like a beautiful dream come true...",
-            "Your smile lights up my world brighter than a thousand stars...",
-            "your an  amazing person I've come to know, inside and out...",
-            "My love for you grows stronger with each passing day...",
-            "You make every day feel like a celebration...",
-            "Thank you for being you - perfect in every way...",
-            "I'm quite Lucky to have you in my life...",
-            "Your happiness means everything to me...",
-            "May this year bring you all the joy and love you deserve...",
-            "I cherish every memory we've created together...",
-            "You are my today and all of my tomorrows...",
-            "Happy Birthday to my one and only baddie! 🎂"
+        // Audio setup
+        let audio = null;
+        let isMusicPlaying = false;
+
+        // Romantic piano music (public domain/royalty-free)
+        const romanticMusic = [
+            "https://assets.mixkit.co/music/preview/mixkit-loving-you-1172.mp3",
+            "https://assets.mixkit.co/music/preview/mixkit-sunny-days-108.mp3",
+            "https://assets.mixkit.co/music/preview/mixkit-falling-in-love-39.mp3"
         ];
+
+        function initMusic() {
+            // Create audio element with fallback
+            audio = new Audio();
+            audio.src = romanticMusic[0]; // Primary source
+            audio.loop = true;
+            audio.volume = 0.4;
+            
+            // Add error handling for music
+            audio.addEventListener('error', function() {
+                console.log('Music failed to load, continuing without audio');
+                document.querySelector('.music-controls').style.display = 'none';
+            });
+        }
+
+        function toggleMusic() {
+            const musicBtn = document.getElementById('musicBtn');
+            
+            if (!isMusicPlaying) {
+                // Play music
+                audio.play().then(() => {
+                    isMusicPlaying = true;
+                    musicBtn.innerHTML = '🎵 Pause Music';
+                    createVisualizer();
+                }).catch(error => {
+                    console.log('Audio play failed:', error);
+                    musicBtn.innerHTML = '🎵 Music Unavailable';
+                    musicBtn.disabled = true;
+                });
+            } else {
+                // Pause music
+                audio.pause();
+                isMusicPlaying = false;
+                musicBtn.innerHTML = '🎵 Play Music';
+                removeVisualizer();
+            }
+        }
+
+        function createVisualizer() {
+            const visualizer = document.getElementById('visualizer');
+            visualizer.innerHTML = '';
+            
+            for (let i = 0; i < 50; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.animationDelay = (Math.random() * 1.5) + 's';
+                bar.style.height = (Math.random() * 50 + 10) + 'px';
+                visualizer.appendChild(bar);
+            }
+        }
+
+        function removeVisualizer() {
+            const visualizer = document.getElementById('visualizer');
+            visualizer.innerHTML = '';
+        }
+
+        // Enhanced lovely messages for Esther
+        const messages = [
+            "My dearest Esther, from the moment I met you, my life has been filled with colors I never knew existed...",
+            "Your smile is like the first ray of sunshine on a perfect morning - it warms my entire world...",
+            "Every day with you feels like a beautiful chapter in our own fairy tale...",
+            "You have this incredible way of making everything better just by being you...",
+            "I cherish the way your eyes light up when you're happy, and how your laughter fills the room with joy...",
+            "You are the most beautiful soul I've ever encountered, inside and out...",
+            "My love for you grows deeper with every passing moment we share together...",
+            "You make me want to be a better person, to deserve the incredible love you give so freely...",
+            "Thank you for being my partner, my best friend, and my greatest adventure...",
+            "On this special day, I want you to know how incredibly loved and cherished you are...",
+            "May this year bring you all the happiness, love, and beautiful moments you deserve...",
+            "You are my today, my tomorrow, and all the days after. Happy Birthday, my love! 💖"
+        ];
+
+        // Create stars
+        function createStars() {
+            const nightSky = document.getElementById('nightSky');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.width = (Math.random() * 3 + 1) + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 4 + 's';
+                nightSky.appendChild(star);
+            }
+        }
+
+        // Create fireflies
+        function createFireflies() {
+            const fireflies = document.getElementById('fireflies');
+            for (let i = 0; i < 30; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'firefly';
+                firefly.style.left = Math.random() * 100 + 'vw';
+                firefly.style.top = Math.random() * 100 + 'vh';
+                firefly.style.animationDelay = Math.random() * 15 + 's';
+                firefly.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                fireflies.appendChild(firefly);
+            }
+        }
+
+        // Create tree lights
+        function createTreeLights() {
+            const tree = document.querySelector('.tree');
+            const lightColors = ['#ff6b6b', '#ffd166', '#7bed9f', '#70a1ff', '#ff9ff3'];
+            
+            for (let i = 0; i < 25; i++) {
+                const light = document.createElement('div');
+                light.className = 'light';
+                light.style.backgroundColor = lightColors[Math.floor(Math.random() * lightColors.length)];
+                light.style.left = Math.random() * 180 + 10 + 'px';
+                light.style.top = Math.random() * 200 + 60 + 'px';
+                light.style.animationDelay = Math.random() * 2 + 's';
+                tree.appendChild(light);
+            }
+        }
 
         function yesClicked() {
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('birthdayContent').classList.remove('hidden');
+            createStars();
+            createFireflies();
+            createTreeLights();
             createHearts();
             startMessageDisplay();
+            
+            // Auto-start music when she enters
+            setTimeout(() => {
+                toggleMusic();
+            }, 1000);
         }
 
         function noClicked() {
@@ -286,15 +681,15 @@
 
         function createHearts() {
             const heartsContainer = document.getElementById('heartsContainer');
-            const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞'];
+            const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞', '🌸', '✨'];
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 40; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
                 heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 6 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 25 + 20) + 'px';
                 heartsContainer.appendChild(heart);
             }
         }
@@ -308,28 +703,21 @@
                     const messageDiv = document.createElement('div');
                     messageDiv.className = 'message';
                     messageDiv.textContent = messages[messageIndex];
-                    messageDiv.style.animationDelay = (messageIndex * 0.5) + 's';
+                    messageDiv.style.animationDelay = (messageIndex * 0.3) + 's';
                     messagesContainer.appendChild(messageDiv);
                     messageIndex++;
-                    setTimeout(displayNextMessage, 1000);
+                    setTimeout(displayNextMessage, 4000); // Show next message after 4 seconds
                 }
             }
 
-            setTimeout(displayNextMessage, 900);
+            // Start showing messages after cake animation completes
+            setTimeout(displayNextMessage, 5000);
         }
 
-        // Add some romantic music (optional - uncomment if you want audio)
-        
-        function playRomanticMusic() {
-            const audio = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAABAAACcQCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAABQTEFNRTMuMTAwBKkAAAAAAAAAADUgJAOHQQAB9AAACHDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//tQxAAAAAAAAAAAAAAAAAAAAAAA');
-            audio.loop = true;
-            audio.volume = 0.3;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-        }
-        
-        // Call this in yesClicked() if you want music
-        // playRomanticMusic();
-        
+        // Initialize
+        createStars();
+        createFireflies();
+        initMusic();
     </script>
 </body>
 </html>
