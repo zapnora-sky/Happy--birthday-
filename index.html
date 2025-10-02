@@ -6,399 +6,54 @@
     <title>Happy Birthday Blessing</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            min-height: 100vh;
-            overflow-x: hidden;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Welcome Screen */
-        .welcome-screen {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .welcome-screen h1 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-        }
-
-        .btn {
-            padding: 14px 40px;
-            margin: 10px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Access Denied */
-        .access-denied {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .access-denied h1 {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-        }
-
-        /* Birthday Content */
-        .birthday-content {
-            position: relative;
-            z-index: 10;
-        }
-
-        .birthday-title {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            margin: 20px 0;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            animation: titleEntrance 1.5s ease-out 0.5s forwards;
-        }
-
-        @keyframes titleEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(50px) scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* Cake Box Animation */
-        .cake-box-container {
-            margin: 40px auto;
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
-
-        .cake-box {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            border-radius: 15px;
-            position: absolute;
-            top: 0;
-            left: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            animation: hopAround 4s ease-in-out infinite;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes hopAround {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-30px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(-5deg);
-            }
-            75% {
-                transform: translateY(-25px) rotate(3deg);
-            }
-        }
-
-        .cake-box.open {
-            animation: openBox 1.5s ease-in-out forwards;
-        }
-
-        @keyframes openBox {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Cake Animation */
-        .cake-container {
-            margin: 30px auto;
-            opacity: 0;
-            transform: scale(0);
-        }
-
-        .cake-container.show {
-            animation: revealCake 1.5s ease-out forwards;
-        }
-
-        @keyframes revealCake {
-            0% {
-                opacity: 0;
-                transform: scale(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .cake {
-            width: 220px;
-            height: 120px;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            border-radius: 10px 10px 0 0;
-            position: relative;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .cake::before {
-            content: '';
-            position: absolute;
-            top: -25px;
-            left: 20px;
-            right: 20px;
-            height: 25px;
-            background: linear-gradient(45deg, #ffd166, #ffef9f);
-            border-radius: 10px 10px 0 0;
-        }
-
-        .candle {
-            width: 8px;
-            height: 35px;
-            background: #fff;
-            position: absolute;
-            top: -65px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-        }
-
-        .candle.lit {
-            animation: lightCandle 1s ease-in-out forwards;
-        }
-
-        .flame {
-            width: 14px;
-            height: 22px;
-            background: linear-gradient(45deg, #ffd700, #ff6b6b);
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            box-shadow: 0 0 15px #ff6b6b;
-        }
-
-        .flame.flicker {
-            animation: flicker 0.8s ease-in-out infinite alternate;
-        }
-
-        @keyframes lightCandle {
-            0% {
-                height: 0;
-                opacity: 0;
-            }
-            100% {
-                height: 35px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes flicker {
-            0%, 100% {
-                transform: translateX(-50%) scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(-50%) scale(1.1);
-                opacity: 0.8;
-            }
-        }
-
-        /* Final Message */
-        .final-message {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 40px auto;
-            max-width: 600px;
-            font-size: 1.4rem;
-            line-height: 1.6;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .final-message.show {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hearts Animation */
-        .hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            opacity: 0;
-            animation: float 8s ease-in infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Fireworks */
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px;
-            animation: explode 1.5s ease-out forwards;
-        }
-
-        @keyframes explode {
-            0% {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-            80% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(0) scale(2);
-                opacity: 0;
-            }
-        }
-
-        /* Hidden class */
-        .hidden {
-            display: none;
-        }
-
-        /* Background elements */
-        .bg-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: bgPulse 10s ease-in-out infinite;
-        }
-
-        @keyframes bgPulse {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* [Same styling as before, unchanged for brevity] */
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        body {font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d); min-height: 100vh; overflow-x: hidden; color: white; display: flex; justify-content: center; align-items: center;}
+        .container {width: 100%; max-width: 800px; text-align: center; padding: 20px;}
+        .welcome-screen {background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); animation: fadeIn 1.5s ease-out;}
+        .welcome-screen h1 {font-size: 2.8rem; margin-bottom: 30px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); font-weight: 600;}
+        .btn {padding: 14px 40px; margin: 10px; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; background: rgba(255,255,255,0.25); color: white; border: 2px solid rgba(255,255,255,0.4); font-weight: 500; letter-spacing: 1px;}
+        .btn:hover {background: rgba(255,255,255,0.4); transform: translateY(-3px); box-shadow: 0 7px 15px rgba(0,0,0,0.2);}
+        .access-denied {background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);}
+        .access-denied h1 {font-size: 2.2rem; margin-bottom: 30px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); font-weight: 600;}
+        .birthday-content {position: relative; z-index: 10;}
+        .birthday-title {font-family: 'Dancing Script', cursive; font-size: 4.5rem; margin: 20px 0; text-shadow: 3px 3px 10px rgba(0,0,0,0.4); opacity: 0; animation: titleEntrance 1.5s ease-out 0.5s forwards;}
+        @keyframes titleEntrance {0% {opacity: 0; transform: translateY(50px) scale(0.8);}100% {opacity: 1; transform: translateY(0) scale(1);}}
+        .cake-box-container {margin: 40px auto; position: relative; width: 200px; height: 200px;}
+        .cake-box {width: 180px; height: 180px; background: linear-gradient(45deg, #ff6b6b, #ff8e8e); border-radius: 15px; position: absolute; top: 0; left: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); animation: hopAround 4s ease-in-out infinite; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); z-index: 2;}
+        @keyframes hopAround {0%, 100% {transform: translateY(0) rotate(0deg);} 25% {transform: translateY(-30px) rotate(5deg);} 50% {transform: translateY(-15px) rotate(-5deg);} 75% {transform: translateY(-25px) rotate(3deg);}}
+        .cake-box.open {animation: openBox 1.5s ease-in-out forwards;}
+        @keyframes openBox {0% {transform: scale(1);}50% {transform: scale(1.1);}100% {transform: scale(0); opacity: 0;}}
+        .cake-container {margin: 30px auto; opacity: 0; transform: scale(0);}
+        .cake-container.show {animation: revealCake 1.5s ease-out forwards;}
+        @keyframes revealCake {0% {opacity: 0; transform: scale(0);}100% {opacity: 1; transform: scale(1);}}
+        .cake {width: 220px; height: 120px; background: linear-gradient(45deg, #ff6b6b, #ff8e8e); border-radius: 10px 10px 0 0; position: relative; margin: 0 auto; box-shadow: 0 5px 15px rgba(0,0,0,0.2);}
+        .cake::before {content: ''; position: absolute; top: -25px; left: 20px; right: 20px; height: 25px; background: linear-gradient(45deg, #ffd166, #ffef9f); border-radius: 10px 10px 0 0;}
+        .candle {width: 8px; height: 35px; background: #fff; position: absolute; top: -65px; left: 50%; transform: translateX(-50%); opacity: 0;}
+        .candle.lit {animation: lightCandle 1s ease-in-out forwards;}
+        .flame {width: 14px; height: 22px; background: linear-gradient(45deg, #ffd700, #ff6b6b); border-radius: 50% 50% 20% 20%; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); opacity: 0; box-shadow: 0 0 15px #ff6b6b;}
+        .flame.flicker {animation: flicker 0.8s ease-in-out infinite alternate;}
+        @keyframes lightCandle {0% {height: 0; opacity: 0;}100% {height: 35px; opacity: 1;}}
+        @keyframes flicker {0%, 100% {transform: translateX(-50%) scale(1); opacity: 1;}50% {transform: translateX(-50%) scale(1.1); opacity: 0.8;}}
+        .final-message {background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); padding: 25px; border-radius: 15px; margin: 40px auto; max-width: 600px; font-size: 1.4rem; line-height: 1.6; box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.3); opacity: 0; transform: translateY(20px); transition: opacity 0.7s, transform 0.7s;}
+        .final-message.show {animation: fadeInUp 1s ease-out forwards;}
+        @keyframes fadeInUp {to {opacity: 1; transform: translateY(0);}}
+        .replay-btn {display: none; margin: 30px auto 0 auto; padding: 13px 36px; font-size: 1.1rem; border-radius: 30px; border: none; background: #ff6b6b; color: #fff; font-weight: bold; cursor: pointer; box-shadow: 0 4px 18px #ff6b6b66; transition: background 0.3s, transform 0.2s;}
+        .replay-btn:hover {background: #e94444; transform: scale(1.08);}
+        .hearts {position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;}
+        .heart {position: absolute; font-size: 24px; opacity: 0; animation: float 8s ease-in infinite;}
+        @keyframes float {0% {transform: translateY(100vh) rotate(0deg); opacity: 0;}10% {opacity: 1;}90% {opacity: 1;}100% {transform: translateY(-100px) rotate(360deg); opacity: 0;}}
+        .fireworks {position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;}
+        .firework {position: absolute; width: 5px; height: 5px; border-radius: 50%; box-shadow: 0 0 10px 2px; animation: explode 1.5s ease-out forwards;}
+        @keyframes explode {0% {transform: translateY(100vh); opacity: 1;}80% {opacity: 1;}100% {transform: translateY(0) scale(2); opacity: 0;}}
+        .hidden {display: none;}
+        .bg-elements {position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(120,219,255,0.2) 0%, transparent 50%); animation: bgPulse 10s ease-in-out infinite;}
+        @keyframes bgPulse {0%,100%{opacity:0.5;}50%{opacity:0.8;}}
+        @keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+        @media (max-width: 500px) {
+            .birthday-title {font-size: 2.6rem;}
+            .cake {width: 120px; height: 70px;}
+            .cake-box, .cake-box-container {width: 120px; height: 120px;}
         }
     </style>
 </head>
@@ -406,31 +61,24 @@
     <div class="bg-elements"></div>
     <div class="hearts" id="heartsContainer"></div>
     <div class="fireworks" id="fireworksContainer"></div>
-    
     <div class="container">
         <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
             <h1>Are you Blessing?</h1>
-            <button class="btn" onclick="yesClicked()">Yes</button>
-            <button class="btn" onclick="noClicked()">No</button>
+            <button class="btn" id="yesBtn">Yes</button>
+            <button class="btn" id="noBtn">No</button>
         </div>
-
         <!-- Access Denied -->
         <div class="access-denied hidden" id="accessDenied">
             <h1>Sorry, this special content is just for Blessing</h1>
-            <button class="btn" onclick="goBack()">Go Back</button>
+            <button class="btn" id="goBackBtn">Go Back</button>
         </div>
-
         <!-- Birthday Content -->
         <div class="birthday-content hidden" id="birthdayContent">
             <h1 class="birthday-title">Happy Birthday Blessing!</h1>
-            
             <div class="cake-box-container">
-                <div class="cake-box" id="cakeBox">
-                    Click Me!
-                </div>
+                <div class="cake-box" id="cakeBox">Click Me!</div>
             </div>
-
             <div class="cake-container" id="cakeContainer">
                 <div class="cake">
                     <div class="candle" id="candle">
@@ -438,20 +86,32 @@
                     </div>
                 </div>
             </div>
-
             <div class="final-message" id="finalMessage">
                 I couldn't provide you with much but I hope this puts a little smile on your face
             </div>
+            <button class="replay-btn" id="replayBtn">Replay</button>
         </div>
     </div>
-
+    <!-- Background music (gentle piano, royalty-free from Pixabay) -->
+    <audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/10/16/audio_12e3e1b2b7.mp3" preload="auto" loop></audio>
     <script>
+        // Music: play on "Yes", NO overlays, NO extra taps
+        function playMusic() {
+            var bgMusic = document.getElementById('bgMusic');
+            bgMusic.currentTime = 0;
+            bgMusic.volume = 0.7;
+            bgMusic.play();
+        }
+        function stopMusic() {
+            var bgMusic = document.getElementById('bgMusic');
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+        }
         // Create floating hearts
         function createHearts() {
             const heartsContainer = document.getElementById('heartsContainer');
+            heartsContainer.innerHTML = '';
             const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞'];
-            
-            // Create hearts distributed across the entire page
             for (let i = 0; i < 80; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
@@ -462,95 +122,75 @@
                 heartsContainer.appendChild(heart);
             }
         }
-
         // Create fireworks
         function createFireworks() {
             const fireworksContainer = document.getElementById('fireworksContainer');
+            fireworksContainer.innerHTML = '';
             const colors = ['#ff6b6b', '#ffd166', '#06d6a0', '#118ab2', '#ef476f', '#ffd166'];
-            
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const firework = document.createElement('div');
                     firework.className = 'firework';
                     firework.style.left = Math.random() * 100 + 'vw';
                     firework.style.animationDelay = Math.random() * 0.5 + 's';
-                    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    firework.style.boxShadow = `0 0 10px 2px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                    let color = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.backgroundColor = color;
+                    firework.style.boxShadow = `0 0 10px 2px ${color}`;
                     fireworksContainer.appendChild(firework);
-                    
-                    // Remove firework after animation
-                    setTimeout(() => {
-                        firework.remove();
-                    }, 1500);
-                }, i * 400); // Spread fireworks over 40 seconds
+                    setTimeout(() => {firework.remove();}, 1500);
+                }, i * 400);
             }
         }
-
-        // Show final message with blinking effect
         function showFinalMessage() {
             const finalMessage = document.getElementById('finalMessage');
             finalMessage.classList.add('show');
-            
-            // Make the message appear and disappear
             let visible = true;
             const interval = setInterval(() => {
                 finalMessage.style.opacity = visible ? '1' : '0';
                 visible = !visible;
-            }, 2000); // Change every 2 seconds
-            
-            // Stop blinking after 1 minute and keep message visible
+            }, 2000);
             setTimeout(() => {
                 clearInterval(interval);
                 finalMessage.style.opacity = '1';
-            }, 60000);
+                document.getElementById('replayBtn').style.display = 'block';
+            }, 8000);
         }
-
-        // Event handlers
+        // --- Event Handlers with replay ---
         function yesClicked() {
             document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('accessDenied').classList.add('hidden');
             document.getElementById('birthdayContent').classList.remove('hidden');
             createHearts();
-            
-            // Start fireworks after title animation
-            setTimeout(() => {
-                createFireworks();
-                
-                // After fireworks, make cake box clickable
-                setTimeout(() => {
-                    document.getElementById('cakeBox').addEventListener('click', openCakeBox);
-                }, 40000); // 40 seconds of fireworks
-            }, 2000);
+            playMusic();
+            setTimeout(() => {createFireworks();}, 2000);
+            document.getElementById('cakeBox').addEventListener('click', openCakeBox, {once:true});
+            document.getElementById('cakeContainer').classList.remove('show');
+            document.getElementById('finalMessage').classList.remove('show');
+            document.getElementById('finalMessage').style.opacity = 0;
+            document.getElementById('replayBtn').style.display = 'none';
+            document.querySelector('.cake-box').classList.remove('open');
         }
-
         function noClicked() {
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('accessDenied').classList.remove('hidden');
+            stopMusic();
         }
-
         function goBack() {
             document.getElementById('accessDenied').classList.add('hidden');
             document.getElementById('welcomeScreen').classList.remove('hidden');
         }
-
         function openCakeBox() {
             const cakeBox = document.getElementById('cakeBox');
             cakeBox.classList.add('open');
-            
-            // Show cake after box opens
             setTimeout(() => {
                 const cakeContainer = document.getElementById('cakeContainer');
                 cakeContainer.classList.add('show');
-                
-                // Light candle after cake appears
                 setTimeout(() => {
                     const candle = document.getElementById('candle');
                     const flame = document.getElementById('flame');
-                    
                     candle.classList.add('lit');
                     setTimeout(() => {
                         flame.classList.add('flicker');
-                        
-                        // Show final message after candle is lit
                         setTimeout(() => {
                             showFinalMessage();
                         }, 1500);
@@ -558,6 +198,14 @@
                 }, 1000);
             }, 1500);
         }
+        document.getElementById('replayBtn').onclick = function() {
+            document.getElementById('birthdayContent').classList.add('hidden');
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            stopMusic();
+        };
+        document.getElementById('yesBtn').onclick = yesClicked;
+        document.getElementById('noBtn').onclick = noClicked;
+        document.getElementById('goBackBtn').onclick = goBack;
     </script>
 </body>
 </html>
