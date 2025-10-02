@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday My Baddie! 💖</title>
+    <title>Happy Birthday Blessing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,207 +13,286 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
             overflow-x: hidden;
             color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            width: 100%;
+            max-width: 800px;
             text-align: center;
             padding: 20px;
-            position: relative;
-            z-index: 2;
         }
 
         /* Welcome Screen */
         .welcome-screen {
             background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             padding: 40px 30px;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            max-width: 90%;
-            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1.5s ease-out;
         }
 
         .welcome-screen h1 {
-            font-size: 2.2em;
+            font-size: 2.8rem;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffd166);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.3;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
         }
 
         .btn {
-            padding: 15px 35px;
+            padding: 14px 40px;
             margin: 10px;
-            font-size: 1.1em;
+            font-size: 1.2rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            background: rgba(255, 255, 255, 0.25);
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            font-weight: bold;
-            width: 180px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Access Denied */
+        .access-denied {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .access-denied h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
         }
 
         /* Birthday Content */
-        #birthdayContent {
-            width: 100%;
-            max-width: 500px;
+        .birthday-content {
+            position: relative;
+            z-index: 10;
         }
 
-        /* Animated Gift Box */
-        .gift-scene {
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            margin: 20px 0;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: titleEntrance 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes titleEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Cake Box Animation */
+        .cake-box-container {
+            margin: 40px auto;
             position: relative;
-            margin: 30px 0;
+            width: 200px;
             height: 200px;
         }
 
-        .gift-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+        .cake-box {
+            width: 180px;
+            height: 180px;
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            border-radius: 10px;
-            animation: bounce 2s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .gift-box::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 20px;
-            background: #ffd166;
-            border-radius: 5px;
-        }
-
-        .gift-box::after {
-            content: '';
+            border-radius: 15px;
             position: absolute;
             top: 0;
+            left: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            animation: hopAround 4s ease-in-out infinite;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes hopAround {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-25px) rotate(3deg);
+            }
+        }
+
+        .cake-box.open {
+            animation: openBox 1.5s ease-in-out forwards;
+        }
+
+        @keyframes openBox {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Cake Animation */
+        .cake-container {
+            margin: 30px auto;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .cake-container.show {
+            animation: revealCake 1.5s ease-out forwards;
+        }
+
+        @keyframes revealCake {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .cake {
+            width: 220px;
+            height: 120px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cake::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 20px;
+            right: 20px;
+            height: 25px;
+            background: linear-gradient(45deg, #ffd166, #ffef9f);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .candle {
+            width: 8px;
+            height: 35px;
+            background: #fff;
+            position: absolute;
+            top: -65px;
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: #ffd166;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -60%) scale(1.05); }
-        }
-
-        /* Main Birthday Message */
-        .main-message {
-            font-size: 2.8em;
-            font-weight: bold;
-            margin: 30px 0;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffd166);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-            padding: 0 10px;
-        }
-
-        /* Message Display Box */
-        .message-box {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 30px auto;
-            max-width: 400px;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .lovely-message {
-            font-size: 1.3em;
-            line-height: 1.5;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
             opacity: 0;
-            animation: fadeInOut 6s ease-in-out;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; transform: translateY(10px); }
-            20%, 80% { opacity: 1; transform: translateY(0); }
+        .candle.lit {
+            animation: lightCandle 1s ease-in-out forwards;
+        }
+
+        .flame {
+            width: 14px;
+            height: 22px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            box-shadow: 0 0 15px #ff6b6b;
+        }
+
+        .flame.flicker {
+            animation: flicker 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes lightCandle {
+            0% {
+                height: 0;
+                opacity: 0;
+            }
+            100% {
+                height: 35px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.8;
+            }
         }
 
         /* Final Message */
         .final-message {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin: 40px 0;
-            text-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px auto;
+            max-width: 600px;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             opacity: 0;
-            animation: finalReveal 2s ease-out 2s forwards;
+            transform: translateY(20px);
         }
 
-        @keyframes finalReveal {
-            to { opacity: 1; }
+        .final-message.show {
+            animation: fadeInUp 1s ease-out forwards;
         }
 
-        /* Fireworks */
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .firework {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: explode 1.5s ease-out forwards;
-        }
-
-        @keyframes explode {
-            0% { transform: translateY(100vh); opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateY(0) scale(30); opacity: 0; }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hearts Animation */
@@ -223,21 +303,65 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 1;
         }
 
         .heart {
             position: absolute;
-            font-size: 20px;
+            font-size: 24px;
             opacity: 0;
-            animation: float 6s ease-in infinite;
+            animation: float 8s ease-in infinite;
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 1; transform: scale(1); }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg) scale(1.2); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Fireworks */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(2);
+                opacity: 0;
+            }
         }
 
         /* Hidden class */
@@ -245,289 +369,157 @@
             display: none;
         }
 
-        /* Music Controls */
-        .music-controls {
+        /* Background elements */
+        .bg-elements {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: bgPulse 10s ease-in-out infinite;
         }
 
-        .music-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9em;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .music-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .welcome-screen {
-                padding: 30px 20px;
-                margin: 20px;
+        @keyframes bgPulse {
+            0%, 100% {
+                opacity: 0.5;
             }
-
-            .welcome-screen h1 {
-                font-size: 1.8em;
-            }
-
-            .main-message {
-                font-size: 2.2em;
-            }
-
-            .final-message {
-                font-size: 1.5em;
-            }
-
-            .message-box {
-                margin: 20px;
-                padding: 20px;
-                min-height: 100px;
-            }
-
-            .lovely-message {
-                font-size: 1.1em;
-            }
-
-            .btn {
-                padding: 12px 25px;
-                font-size: 1em;
-                width: 160px;
-            }
-
-            .gift-box {
-                width: 100px;
-                height: 100px;
+            50% {
+                opacity: 0.8;
             }
         }
 
-        @media (max-width: 480px) {
-            .welcome-screen h1 {
-                font-size: 1.6em;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
-
-            .main-message {
-                font-size: 1.8em;
-            }
-
-            .final-message {
-                font-size: 1.3em;
-            }
-
-            .message-box {
-                padding: 15px;
-                min-height: 80px;
-            }
-
-            .lovely-message {
-                font-size: 1em;
+            to {
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Music Controls -->
-    <div class="music-controls">
-        <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🔊 Music On</button>
-    </div>
-
-    <div class="fireworks" id="fireworks"></div>
+    <div class="bg-elements"></div>
     <div class="hearts" id="heartsContainer"></div>
+    <div class="fireworks" id="fireworksContainer"></div>
     
     <div class="container">
         <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
-            <h1>Are you my beautiful Esther? 💖</h1>
-            <button class="btn" onclick="yesClicked()">Yes, it's me!</button>
+            <h1>Are you Blessing?</h1>
+            <button class="btn" onclick="yesClicked()">Yes</button>
             <button class="btn" onclick="noClicked()">No</button>
         </div>
 
         <!-- Access Denied -->
-        <div class="welcome-screen hidden" id="accessDenied">
-            <h1>This special surprise is only for my baddie Esther! 💕</h1>
+        <div class="access-denied hidden" id="accessDenied">
+            <h1>Sorry, this special content is just for Blessing</h1>
             <button class="btn" onclick="goBack()">Go Back</button>
         </div>
 
         <!-- Birthday Content -->
-        <div class="hidden" id="birthdayContent">
-            <!-- Animated Gift Box -->
-            <div class="gift-scene">
-                <div class="gift-box"></div>
+        <div class="birthday-content hidden" id="birthdayContent">
+            <h1 class="birthday-title">Happy Birthday Blessing!</h1>
+            
+            <div class="cake-box-container">
+                <div class="cake-box" id="cakeBox">
+                    Click Me!
+                </div>
             </div>
 
-            <!-- Main Birthday Message -->
-            <div class="main-message" id="mainMessage">
-                Happy Birthday My Baddie! 🎉
+            <div class="cake-container" id="cakeContainer">
+                <div class="cake">
+                    <div class="candle" id="candle">
+                        <div class="flame" id="flame"></div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Message Display Box -->
-            <div class="message-box">
-                <div class="lovely-message" id="currentMessage"></div>
-            </div>
-
-            <!-- Final Message -->
             <div class="final-message" id="finalMessage">
-                You mean everything to me, happy birthday once more my love! 💖
+                I couldn't provide you with much but I hope this puts a little smile on your face
             </div>
         </div>
     </div>
 
     <script>
-        // Music setup
-        let audio = null;
-        let isMusicPlaying = true;
-        let currentMusicIndex = 0;
-
-        // Multiple romantic music tracks
-        const musicTracks = [
-            'https://assets.mixkit.co/music/preview/mixkit-loving-you-1172.mp3',
-            'https://assets.mixkit.co/music/preview/mixkit-sunny-days-108.mp3',
-            'https://assets.mixkit.co/music/preview/mixkit-falling-in-love-39.mp3'
-        ];
-
-        // Firework sound (short celebration sound)
-        const fireworkSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-
-        function initMusic() {
-            audio = new Audio(musicTracks[0]);
-            audio.loop = true;
-            audio.volume = 0.6;
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞'];
             
-            // Auto-play music when page loads
-            document.addEventListener('click', function() {
-                if (!audio.played) {
-                    audio.play().catch(e => console.log('Auto-play prevented'));
-                }
-            }, { once: true });
-
-            // Switch music every 30 seconds
-            setInterval(switchMusic, 30000);
-        }
-
-        function switchMusic() {
-            if (isMusicPlaying) {
-                currentMusicIndex = (currentMusicIndex + 1) % musicTracks.length;
-                audio.src = musicTracks[currentMusicIndex];
-                audio.play().catch(e => console.log('Music switch failed'));
+            // Create hearts distributed across the entire page
+            for (let i = 0; i < 80; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                heartsContainer.appendChild(heart);
             }
         }
 
-        function toggleMusic() {
-            const musicBtn = document.getElementById('musicBtn');
-            if (isMusicPlaying) {
-                audio.pause();
-                isMusicPlaying = false;
-                musicBtn.innerHTML = '🔇 Music Off';
-            } else {
-                audio.play();
-                isMusicPlaying = true;
-                musicBtn.innerHTML = '🔊 Music On';
-            }
-        }
-
-        function playFireworkSound() {
-            fireworkSound.currentTime = 0;
-            fireworkSound.volume = 0.3;
-            fireworkSound.play().catch(e => console.log('Firework sound failed'));
-        }
-
-        // Lovely messages for Esther
-        const messages = [
-            "Every moment with you feels like magic... ✨",
-            "Your smile brightens my darkest days... 🌟",
-            "You are the most amazing person I know... 💫",
-            "My love for you grows stronger every day... 🌹",
-            "You make my world complete... 🌍",
-            "Thank you for being you, my beautiful Esther... 🌸",
-            "I'm so grateful to have you in my life... 💖",
-            "Your happiness means everything to me... 😊",
-            "May this year be your best one yet... 🎂",
-            "You deserve all the love and joy in the world... 🌈",
-            "I cherish every memory we create together... 📸",
-            "You are my today and all of my tomorrows... ⭐"
-        ];
-
+        // Create fireworks
         function createFireworks() {
-            const fireworksContainer = document.getElementById('fireworks');
-            const colors = ['#ff6b6b', '#ffd166', '#7bed9f', '#70a1ff', '#ff9ff3'];
+            const fireworksContainer = document.getElementById('fireworksContainer');
+            const colors = ['#ff6b6b', '#ffd166', '#06d6a0', '#118ab2', '#ef476f', '#ffd166'];
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
                     const firework = document.createElement('div');
                     firework.className = 'firework';
                     firework.style.left = Math.random() * 100 + 'vw';
                     firework.style.animationDelay = Math.random() * 0.5 + 's';
                     firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.boxShadow = `0 0 10px 2px ${colors[Math.floor(Math.random() * colors.length)]}`;
                     fireworksContainer.appendChild(firework);
                     
                     // Remove firework after animation
                     setTimeout(() => {
                         firework.remove();
                     }, 1500);
-                }, i * 100);
-            }
-            
-            // Play firework sound
-            playFireworkSound();
-        }
-
-        function createHearts() {
-            const heartsContainer = document.getElementById('heartsContainer');
-            const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '💞'];
-            
-            for (let i = 0; i < 30; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 6 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                heartsContainer.appendChild(heart);
+                }, i * 400); // Spread fireworks over 40 seconds
             }
         }
 
-        function displayRandomMessages() {
-            const messageElement = document.getElementById('currentMessage');
-            let currentIndex = 0;
-
-            function showNextMessage() {
-                messageElement.style.animation = 'none';
-                void messageElement.offsetWidth; // Trigger reflow
-                messageElement.style.animation = 'fadeInOut 6s ease-in-out';
-                
-                messageElement.textContent = messages[currentIndex];
-                currentIndex = (currentIndex + 1) % messages.length;
-            }
-
-            // Show first message immediately
-            showNextMessage();
+        // Show final message with blinking effect
+        function showFinalMessage() {
+            const finalMessage = document.getElementById('finalMessage');
+            finalMessage.classList.add('show');
             
-            // Change message every 6 seconds
-            setInterval(showNextMessage, 6000);
+            // Make the message appear and disappear
+            let visible = true;
+            const interval = setInterval(() => {
+                finalMessage.style.opacity = visible ? '1' : '0';
+                visible = !visible;
+            }, 2000); // Change every 2 seconds
+            
+            // Stop blinking after 1 minute and keep message visible
+            setTimeout(() => {
+                clearInterval(interval);
+                finalMessage.style.opacity = '1';
+            }, 60000);
         }
 
+        // Event handlers
         function yesClicked() {
             document.getElementById('welcomeScreen').classList.add('hidden');
             document.getElementById('birthdayContent').classList.remove('hidden');
-            
-            // Start animations
             createHearts();
-            createFireworks();
-            displayRandomMessages();
             
-            // Ensure music is playing
-            if (!isMusicPlaying) {
-                toggleMusic();
-            }
+            // Start fireworks after title animation
+            setTimeout(() => {
+                createFireworks();
+                
+                // After fireworks, make cake box clickable
+                setTimeout(() => {
+                    document.getElementById('cakeBox').addEventListener('click', openCakeBox);
+                }, 40000); // 40 seconds of fireworks
+            }, 2000);
         }
 
         function noClicked() {
@@ -540,8 +532,32 @@
             document.getElementById('welcomeScreen').classList.remove('hidden');
         }
 
-        // Initialize music when page loads
-        window.addEventListener('load', initMusic);
+        function openCakeBox() {
+            const cakeBox = document.getElementById('cakeBox');
+            cakeBox.classList.add('open');
+            
+            // Show cake after box opens
+            setTimeout(() => {
+                const cakeContainer = document.getElementById('cakeContainer');
+                cakeContainer.classList.add('show');
+                
+                // Light candle after cake appears
+                setTimeout(() => {
+                    const candle = document.getElementById('candle');
+                    const flame = document.getElementById('flame');
+                    
+                    candle.classList.add('lit');
+                    setTimeout(() => {
+                        flame.classList.add('flicker');
+                        
+                        // Show final message after candle is lit
+                        setTimeout(() => {
+                            showFinalMessage();
+                        }, 1500);
+                    }, 1000);
+                }, 1000);
+            }, 1500);
+        }
     </script>
 </body>
 </html>
