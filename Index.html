@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Adelia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Background */
+    body {
+      background: url('https://i.imgur.com/Nuz4LwP.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Overlay for sky effects */
+    #overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    /* Prompt Container */
+    #promptContainer {
+      z-index: 10;
+      position: absolute;
+      top: 0; left: 0;width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    #promptContainer select, #promptContainer button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    #mainContent {
+      display: none;
+      z-index: 5;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      text-align: center;
+      color: #fff;
+    }
+
+    .cake {
+      width: 120px;
+      margin: 0 auto;
+      position: relative;
+      margin-top: 100px;
+    }
+
+    .layer {
+      height: 40px;
+      background: #ff7675;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .layer:nth-child(2) { background: #fab1a0; animation-delay: 1s; }
+    .layer:nth-child(3) { background: #ffeaa7; animation-delay: 2s; }
+
+    .candles {
+      display: flex;
+      justify-content: center;
+      margin-top: -15px;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 3s;
+    }
+
+    .candle {
+      width: 6px; height: 20px;background: #fff;
+      margin: 0 4px;
+      position: relative;
+    }
+
+    .flame {
+      width: 6px; height: 6px;
+      background: yellow;
+      border-radius: 50%;
+      position: absolute;
+      top: -8px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      animation: flicker 0.4s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 24px;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 4s;
+    }
+
+    #rotatingMessages {
+      margin-top: 10px;
+      font-size: 18px;
+      height: 24px;
+      transition: opacity 0.5s;
+    }
+
+    /* Shooting star */
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: white;
+      animation: shoot 4s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes shoot {
+      0% { transform: translate(-100px, -100px); opacity: 1; }
+      100% { transform: translate(800px, 800px); opacity: 0; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Overlay and Prompts -->
+<div id="overlay"></div>
