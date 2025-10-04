@@ -151,4 +151,107 @@
 <body>
 
 <!-- Overlay and Prompts -->
-<div id="overlay"></div>
+<div id="overlay"></div><div id="promptContainer">
+  <h2>Are you Adelia?</h2>
+  <button onclick="checkName(true)">Yes</button>
+  <button onclick="checkName(false)">No</button>
+</div>
+
+<div id="countryPrompt" style="display:none;">
+  <h2>Which country are you from?</h2>
+  <select id="countrySelect">
+    <option>-- Select --</option>
+    <option>Ghana</option>
+    <option>Kenya</option>
+    <option>Indonesia</option>
+    <option>Philippines</option>
+    <option>Other</option>
+  </select>
+  <button onclick="checkCountry()">Continue</button>
+</div>
+
+<div id="musicPrompt" style="display:none;">
+  <h2>Would you like some background music?</h2>
+  <button onclick="startExperience(true)">Yes</button>
+  <button onclick="startExperience(false)">No</button>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+  <div class="shooting-star" style="top:10%; left:5%; animation-delay: 1s;"></div>
+  <div class="shooting-star" style="top:30%; left:20%; animation-delay: 3s;"></div>
+  <div class="shooting-star" style="top:50%; left:15%; animation-delay: 5s;"></div>
+
+  <div class="cake">
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="candles">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div>
+    </div>
+  </div>
+  <div id="message">Happy Birthday Adelia! 🎉</div>
+  <div id="rotatingMessages"></div>
+</div>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/04/12/audio_1f9e1dc6f5.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const rotatingTexts = [
+     "you bring happiness to tje hearts ❤️ of those who know you",
+    "Your smile brings warmth to hearts.",
+    "Today, i celebrate you as a very Good friend.",
+    "May your dreams shine as bright as the stars.",
+    "Adelia, you are truly special."
+    "Simon ✨ truly cares🤞"
+  ];
+
+  let currentIndex = 0;
+  const msgBox = document.getElementById('rotatingMessages');
+
+  function checkName(isAdelia) {
+    if (!isAdelia) {
+      document.getElementById('promptContainer').innerHTML = "<h2>Sorry, special contents are only for Adelia.</h2>";
+    } else {
+      document.getElementById('promptContainer').style.display = 'none';
+      document.getElementById('countryPrompt').style.display = 'flex';
+    }
+  }
+
+  function checkCountry() {
+    const country = document.getElementById('countrySelect').value;
+    if (country === "Indonesia") {
+      document.getElementById('countryPrompt').style.display = 'none';
+      document.getElementById('musicPrompt').style.display = 'flex';
+    } else {alert("Hmm... That doesn't seem right.");
+    }
+  }
+
+  function startExperience(playMusic) {
+    document.getElementById('musicPrompt').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+
+    if (playMusic) {
+      document.getElementById('bgMusic').play();
+    }
+
+    // Start rotating messages
+    setInterval(() => {
+      msgBox.style.opacity = 0;
+      setTimeout(() => {
+        msgBox.textContent = rotatingTexts[currentIndex];
+        msgBox.style.opacity = 1;
+        currentIndex = (currentIndex + 1) % rotatingTexts.length;
+      }, 500);
+    }, 4000);
+  }
+</script>
+
+</body>
+</html>
+
+  
