@@ -11,29 +11,80 @@
       overflow: hidden;
       height: 100%;
       font-family: 'Segoe UI', sans-serif;
+      background: #101830;
     }
 
-    /* Background */
+    /* Night sky background gradient */
     body {
-      background: url('https://i.imgur.com/Nuz4LwP.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to bottom, #101830 60%, #243a60 100%);
       position: relative;
+      height: 100vh;
+      width: 100vw;
     }
 
-    /* Overlay for sky effects */
+    /* Animated stars */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.7;
+      animation: twinkle 2s infinite;
+      pointer-events: none;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.2; }
+    }
+
+    /* Glowing Moon */
+    #moon {
+      position: absolute;
+      top: 60px;
+      right: 100px;
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle at 30% 30%, #fffbe7 70%, #e0e6f6 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px 20px #ffffeecc, 0 0 120px 50px #fdf6e1aa;
+      z-index: 2;
+    }
+
+    /* Shooting stars */
+    .shooting-star {
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, #fff, #fff0 80%);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 4;
+      animation: shoot 2.5s linear forwards;
+    }
+    @keyframes shoot {
+      from { opacity: 0; }
+      10% { opacity: 1; }
+      to {
+        transform: translate(400px, 120px);
+        opacity: 0;
+      }
+    }
+
+    /* Overlay for darkening the sky */
     #overlay {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.4);
       z-index: 1;
+      pointer-events: none;
     }
 
-    /* Prompt Container */
-    #promptContainer {
+    /* Prompt Container styling */
+    #promptContainer, #countryPrompt, #musicPrompt {
       z-index: 10;
       position: absolute;
-      top: 0; left: 0;width: 100%; height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85);
       display: flex;
       align-items: center;
@@ -42,7 +93,9 @@
       color: #fff;
     }
 
-    #promptContainer select, #promptContainer button {
+    #promptContainer select, #promptContainer button,
+    #countryPrompt select, #countryPrompt button,
+    #musicPrompt button {
       margin: 10px;
       padding: 10px 20px;
       font-size: 16px;
@@ -57,59 +110,92 @@
       z-index: 5;
       position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
+      width: 100vw; height: 100vh;
       text-align: center;
       color: #fff;
+      overflow: hidden;
     }
 
+    /* Floating Cloud Platform */
+    .cloud-platform {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 40vh;
+      z-index: 6;
+      animation: cloudFloat 3s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 30px #fff7);
+      opacity: 0;
+      transition: opacity 1s;
+    }
+    .cloud-platform.visible { opacity: 1; }
+
+    @keyframes cloudFloat {
+      from { transform: translate(-50%, 0px); }
+      to { transform: translate(-50%, 20px); }
+    }
+
+    /* Cake styling */
     .cake {
       width: 120px;
       margin: 0 auto;
       position: relative;
-      margin-top: 100px;
+      margin-top: 30px;
+      z-index: 7;
+      opacity: 0;
+      transition: opacity 1s;
     }
+    .cake.visible { opacity: 1; }
 
     .layer {
       height: 40px;
-      background: #ff7675;
       border: 2px solid #fff;
-      border-radius: 10px;
+      border-radius: 40px 40px 36px 36px / 20px 20px 30px 30px;
       margin-bottom: 10px;
+      position: relative;
+      box-shadow: 0 8px 20px #0002 inset, 0 0 10px 2px #fff2;
+      opacity: 0;
       animation: fadeIn 1s ease forwards;
     }
+    .layer1 { background: linear-gradient(90deg, #ff7675, #ffb5a2 60%); animation-delay: 0.2s; }
+    .layer2 { background: linear-gradient(90deg, #fab1a0, #ffd6a0 60%); animation-delay: 0.7s; }
+    .layer3 { background: linear-gradient(90deg, #ffeaa7, #fff8dc 60%); animation-delay: 1.2s; }
 
-    .layer:nth-child(2) { background: #fab1a0; animation-delay: 1s; }
-    .layer:nth-child(3) { background: #ffeaa7; animation-delay: 2s; }
-
+    /* Candles */
     .candles {
       display: flex;
       justify-content: center;
-      margin-top: -15px;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 3s;
+      margin-top: -13px;
+      opacity: 0;
+      transition: opacity 1s;
     }
+    .candles.visible { opacity: 1; }
 
     .candle {
-      width: 6px; height: 20px;background: #fff;
-      margin: 0 4px;
+      width: 7px; height: 22px; background: #fff;
+      margin: 0 5px;
       position: relative;
+      border-radius: 2px 2px 6px 6px;
+      box-shadow: 0 0 2px #ff6;
+    }
+    .flame {
+      width: 8px; height: 13px;
+      background: radial-gradient(circle, #ffd700 60%, #ffab00 100%);
+      border-radius: 60% 60% 60% 60% / 80% 80% 50% 50%;
+      position: absolute;
+      top: -12px; left: -1px;
+      animation: flicker 0.4s infinite alternate;
+      opacity: 0;
+      transition: opacity 0.3s;
+      filter: drop-shadow(0 0 6px #fff6);
     }
 
-    .flame {
-      width: 6px; height: 6px;
-      background: yellow;
-      border-radius: 50%;
-      position: absolute;
-      top: -8px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      animation: flicker 0.4s infinite;
-    }
+    /* Flames appear one by one */
+    .flame.visible { opacity: 1; }
 
     @keyframes flicker {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.7; }
+      0%, 100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+      50% { transform: scale(1.1) rotate(10deg); opacity: 0.75; }
     }
 
     @keyframes fadeIn {
@@ -117,46 +203,66 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Message display area */
     #message {
       margin-top: 30px;
-      font-size: 24px;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: 4s;
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 8;
+      text-shadow: 0 0 16px #fff, 0 0 4px #ffd;
     }
+    #message.visible { opacity: 1; }
 
     #rotatingMessages {
       margin-top: 10px;
-      font-size: 18px;
-      height: 24px;
+      font-size: 1.2rem;
+      min-height: 28px;
       transition: opacity 0.5s;
+      z-index: 8;
+      text-shadow: 0 0 8px #fff, 0 0 3px #ffd;
     }
 
-    /* Shooting star */
-    .shooting-star {
+    /* Floating hearts & sparkles */
+    .floating-heart, .floating-sparkle {
       position: absolute;
-      width: 100px;
-      height: 2px;
-      background: white;
-      animation: shoot 4s linear infinite;
+      z-index: 9;
       opacity: 0.7;
+      pointer-events: none;
+      animation: floatUp 6s linear infinite;
     }
-
-    @keyframes shoot {
-      0% { transform: translate(-100px, -100px); opacity: 1; }
-      100% { transform: translate(800px, 800px); opacity: 0; }
+    .floating-heart {
+      width: 22px; height: 22px;
+      background: none;
+    }
+    .floating-sparkle {
+      width: 12px; height: 12px;
+      background: radial-gradient(circle, #fff, #ffeaa7 40%, #fff0 100%);
+      border-radius: 50%;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 0.7; }
+      80% { opacity: 1; }
+      to { transform: translateY(-60px) scale(1.15); opacity: 0; }
     }
 
   </style>
 </head>
 <body>
 
-<!-- Overlay and Prompts -->
-<div id="overlay"></div><div id="promptContainer">
+<!-- Moon, stars, and overlay -->
+<div id="moon"></div>
+<div id="stars"></div>
+<div id="overlay"></div>
+
+<!-- Prompts -->
+<div id="promptContainer">
   <h2>Are you Adelia?</h2>
   <button onclick="checkName(true)">Yes</button>
   <button onclick="checkName(false)">No</button>
 </div>
-
 <div id="countryPrompt" style="display:none;">
   <h2>Which country are you from?</h2>
   <select id="countrySelect">
@@ -169,7 +275,6 @@
   </select>
   <button onclick="checkCountry()">Continue</button>
 </div>
-
 <div id="musicPrompt" style="display:none;">
   <h2>Would you like some background music?</h2>
   <button onclick="startExperience(true)">Yes</button>
@@ -178,20 +283,30 @@
 
 <!-- Main Content -->
 <div id="mainContent">
-  <div class="shooting-star" style="top:10%; left:5%; animation-delay: 1s;"></div>
-  <div class="shooting-star" style="top:30%; left:20%; animation-delay: 3s;"></div>
-  <div class="shooting-star" style="top:50%; left:15%; animation-delay: 5s;"></div>
-
-  <div class="cake">
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="layer"></div>
-    <div class="candles">
+  <!-- Platform cloud (SVG) -->
+  <div class="cloud-platform" id="cloudPlatform">
+    <!-- Cloud SVG for soft, dreamy look -->
+    <svg width="300" height="100" viewBox="0 0 300 100">
+      <ellipse cx="65" cy="65" rx="65" ry="35" fill="#fff" fill-opacity="0.95" />
+      <ellipse cx="150" cy="55" rx="90" ry="45" fill="#fff" fill-opacity="0.85" />
+      <ellipse cx="240" cy="75" rx="60" ry="28" fill="#fff" fill-opacity="0.90" />
+      <ellipse cx="200" cy="40" rx="50" ry="21" fill="#fff" fill-opacity="0.8" />
+      <ellipse cx="110" cy="38" rx="38" ry="18" fill="#fff" fill-opacity="0.75" />
+    </svg>
+  </div>
+  <!-- Cake on top of cloud -->
+  <div class="cake" id="cakeBox">
+    <div class="layer layer1"></div>
+    <div class="layer layer2"></div>
+    <div class="layer layer3"></div>
+    <div class="candles" id="candles">
       <div class="candle"><div class="flame"></div></div>
-      <div class="candle"><div class="flame"></div></div><div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
     </div>
   </div>
-  <div id="message">Happy Birthday Adelia! 🎉</div>
+  <!-- Message area above cake -->
+  <div id="message">Happy Birthday Adelia!</div>
   <div id="rotatingMessages"></div>
 </div>
 
@@ -201,18 +316,82 @@
 </audio>
 
 <script>
+  // --- Configurations ---
   const rotatingTexts = [
-     "you bring happiness to tje hearts ❤️ of those who know you",
+    "You are a rare gem in this world.",
     "Your smile brings warmth to hearts.",
-    "Today, i celebrate you as a very Good friend.",
+    "Today, we celebrate you completely.",
     "May your dreams shine as bright as the stars.",
-    "Adelia, you are truly special."
-    "Simon ✨ truly cares🤞"
+    "Adelia, you are truly special.",
+    "Simon ✨ truly cares 🤞"
   ];
-
   let currentIndex = 0;
-  const msgBox = document.getElementById('rotatingMessages');
 
+  // --- Star field creation ---
+  function createStars(num = 80) {
+    const starsDiv = document.getElementById('stars');
+    starsDiv.innerHTML = '';
+    for (let i = 0; i < num; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      // Random placement and random size/animation
+      const size = Math.random() * 2.4 + 1.2;
+      const top = Math.random() * 90 + '%';
+      const left = Math.random() * 100 + '%';
+      star.style.width = star.style.height = size + 'px';
+      star.style.top = top;
+      star.style.left = left;
+      star.style.opacity = (Math.random() * 0.8 + 0.2).toFixed(2);
+      star.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
+      starsDiv.appendChild(star);
+    }
+  }
+
+  // --- Animated shooting stars ---
+  function spawnShootingStar() {
+    const area = document.getElementById('mainContent');
+    if (!area) return;
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    // Randomize start point near the top left
+    const startX = Math.random() * window.innerWidth * 0.5;
+    const startY = Math.random() * window.innerHeight * 0.5;
+    star.style.top = startY + 'px';
+    star.style.left = startX + 'px';
+    // Randomize direction
+    const dx = 400 + Math.random() * 200;
+    const dy = 120 + Math.random() * 120;
+    star.style.setProperty('--dx', dx + 'px');
+    star.style.setProperty('--dy', dy + 'px');
+    // Animation
+    area.appendChild(star);
+    setTimeout(() => { area.removeChild(star); }, 2500);
+  }
+
+  // --- Floating hearts and sparkles ---
+  function spawnFloatingElement(type = 'heart') {
+    const area = document.getElementById('mainContent');
+    if (!area) return;
+    let el;
+    if (type === 'heart') {
+      el = document.createElement('div');
+      el.className = 'floating-heart';
+      el.innerHTML = `<svg viewBox="0 0 32 32" width="22" height="22"><path d="M16 29s-10-7.4-10-14.2C6 8.5 10.5 6 13.6 8.8c1.2 1.2 1.9 2.2 2.4 3 0.5-0.8 1.2-1.8 2.4-3C21.5 6 26 8.5 26 14.8 26 21.6 16 29 16 29z" fill="#ff6090"/></svg>`;
+    } else {
+      el = document.createElement('div');
+      el.className = 'floating-sparkle';
+    }
+    // Place randomly near center
+    const left = 40 + Math.random() * 20 + '%';
+    const top = 52 + Math.random() * 8 + '%';
+    el.style.left = left;
+    el.style.top = top;
+    el.style.animationDuration = (4.5 + Math.random() * 2.5) + 's';
+    area.appendChild(el);
+    setTimeout(() => { area.removeChild(el); }, 6000);
+  }
+
+  // --- Prompt/Flow logic ---
   function checkName(isAdelia) {
     if (!isAdelia) {
       document.getElementById('promptContainer').innerHTML = "<h2>Sorry, special contents are only for Adelia.</h2>";
@@ -227,7 +406,8 @@
     if (country === "Indonesia") {
       document.getElementById('countryPrompt').style.display = 'none';
       document.getElementById('musicPrompt').style.display = 'flex';
-    } else {alert("Hmm... That doesn't seem right.");
+    } else {
+      alert("Hmm... That doesn't seem right.");
     }
   }
 
@@ -235,23 +415,76 @@
     document.getElementById('musicPrompt').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
 
+    // Animate platform cloud in
+    setTimeout(() => {
+      document.getElementById('cloudPlatform').classList.add('visible');
+    }, 400);
+
+    // Animate cake in (after cloud appears)
+    setTimeout(() => {
+      document.getElementById('cakeBox').classList.add('visible');
+      // Fade in cake layers with animation
+      const layers = document.querySelectorAll('.cake .layer');
+      layers.forEach((layer, i) => {
+        setTimeout(() => { layer.style.opacity = 1; }, 250 + 350 * i);
+      });
+    }, 1200);
+
+    // Fade in candles after cake
+    setTimeout(() => {
+      document.getElementById('candles').classList.add('visible');
+      // Candle flames appear one by one
+      const flames = document.querySelectorAll('.candle .flame');
+      flames.forEach((flame, i) => {
+        setTimeout(() => { flame.classList.add('visible'); }, 400 * (i + 1));
+      });
+    }, 2000);
+
+    // Show birthday message
+    setTimeout(() => {
+      document.getElementById('message').classList.add('visible');
+    }, 2800);
+
+    // Start rotating personal lines
+    setTimeout(() => {
+      startRotatingMessages();
+    }, 3400);
+
+    // Start background music if selected
     if (playMusic) {
       document.getElementById('bgMusic').play();
     }
 
-    // Start rotating messages
-    setInterval(() => {
+    // Start shooting stars and floating hearts/sparkles
+    setInterval(() => { spawnShootingStar(); }, 1800);
+    setInterval(() => { spawnFloatingElement('heart'); }, 3900);
+    setInterval(() => { spawnFloatingElement('sparkle'); }, 2200);
+  }
+
+  // --- Rotating personal lines ---
+  function startRotatingMessages() {
+    const msgBox = document.getElementById('rotatingMessages');
+    function showNextMsg() {
       msgBox.style.opacity = 0;
       setTimeout(() => {
         msgBox.textContent = rotatingTexts[currentIndex];
         msgBox.style.opacity = 1;
         currentIndex = (currentIndex + 1) % rotatingTexts.length;
       }, 500);
-    }, 4000);
+    }
+    showNextMsg();
+    setInterval(showNextMsg, 4000);
   }
-</script>
 
+  // --- Init on page load ---
+  window.onload = function() {
+    createStars(80);
+  };
+
+  // Responsive starfield on resize
+  window.onresize = function() {
+    createStars(80);
+  };
+</script>
 </body>
 </html>
-
-  
