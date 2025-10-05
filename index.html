@@ -10,19 +10,15 @@
       padding: 0;
       overflow: hidden;
       height: 100%;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
       background: #101830;
     }
-
-    /* Night sky background gradient */
     body {
       background: linear-gradient(to bottom, #101830 60%, #243a60 100%);
       position: relative;
       height: 100vh;
       width: 100vw;
     }
-
-    /* Animated stars */
     .star {
       position: absolute;
       border-radius: 50%;
@@ -35,8 +31,6 @@
       0%, 100% { opacity: 0.7; }
       50% { opacity: 0.2; }
     }
-
-    /* Glowing Moon */
     #moon {
       position: absolute;
       top: 60px;
@@ -48,8 +42,6 @@
       box-shadow: 0 0 60px 20px #ffffeecc, 0 0 120px 50px #fdf6e1aa;
       z-index: 2;
     }
-
-    /* Shooting stars */
     .shooting-star {
       position: absolute;
       width: 120px;
@@ -68,8 +60,6 @@
         opacity: 0;
       }
     }
-
-    /* Overlay for darkening the sky */
     #overlay {
       position: absolute;
       top: 0; left: 0;
@@ -78,8 +68,6 @@
       z-index: 1;
       pointer-events: none;
     }
-
-    /* Prompt Container styling */
     #promptContainer, #countryPrompt, #musicPrompt {
       z-index: 10;
       position: absolute;
@@ -92,7 +80,6 @@
       flex-direction: column;
       color: #fff;
     }
-
     #promptContainer select, #promptContainer button,
     #countryPrompt select, #countryPrompt button,
     #musicPrompt button {
@@ -103,8 +90,6 @@
       border-radius: 6px;
       cursor: pointer;
     }
-
-    /* Main content */
     #mainContent {
       display: none;
       z-index: 5;
@@ -116,113 +101,122 @@
       overflow: hidden;
     }
 
+    /* Message area - now above cloud/cake, always centered */
+    #messageArea {
+      position: absolute;
+      top: 8vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90vw;
+      max-width: 600px;
+      z-index: 8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+    #message {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      opacity: 0;
+      transition: opacity 1s;
+      margin-bottom: 0.4em;
+      text-shadow: 0 0 18px #fff, 0 0 4px #ffd;
+      background: linear-gradient(90deg, #fff8, #ffdbe8 70%, #fff8 100%);
+      border-radius: 18px;
+      padding: 0.2em 0.5em;
+      color: #d02e7f;
+      box-shadow: 0 2px 12px #fff5;
+    }
+    #message.visible { opacity: 1; }
+    #rotatingMessages {
+      font-size: 1.4rem;
+      min-height: 29px;
+      transition: opacity 0.5s;
+      z-index: 8;
+      text-shadow: 0 0 8px #fff, 0 0 3px #ffd;
+      color: #7a3eb1;
+      font-weight: 600;
+      background: rgba(255,255,255,0.14);
+      border-radius: 12px;
+      padding: 0.15em 0.7em;
+    }
+
     /* Floating Cloud Platform */
     .cloud-platform {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 40vh;
+      top: 50vh;
       z-index: 6;
       animation: cloudFloat 3s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 30px #fff7);
+      filter: drop-shadow(0 0 40px #fff7);
       opacity: 0;
       transition: opacity 1s;
+      width: 340px;
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
     .cloud-platform.visible { opacity: 1; }
-
+    @media (max-width: 600px) {
+      .cloud-platform {
+        width: 88vw;
+        height: 80px;
+        top: 54vh;
+      }
+      #messageArea {
+        top: 3.5vh;
+        max-width: 96vw;
+      }
+      #message { font-size: 1.4rem; }
+      #rotatingMessages { font-size: 1.05rem; }
+    }
     @keyframes cloudFloat {
       from { transform: translate(-50%, 0px); }
       to { transform: translate(-50%, 20px); }
     }
 
-    /* Cake styling */
-    .cake {
-      width: 120px;
-      margin: 0 auto;
-      position: relative;
-      margin-top: 30px;
+    /* Modern CAKE (SVG) */
+    .cakeBox {
+      position: absolute;
+      left: 50%;
+      top: 37vh;
+      transform: translateX(-50%);
       z-index: 7;
       opacity: 0;
       transition: opacity 1s;
-    }
-    .cake.visible { opacity: 1; }
-
-    .layer {
-      height: 40px;
-      border: 2px solid #fff;
-      border-radius: 40px 40px 36px 36px / 20px 20px 30px 30px;
-      margin-bottom: 10px;
-      position: relative;
-      box-shadow: 0 8px 20px #0002 inset, 0 0 10px 2px #fff2;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-    }
-    .layer1 { background: linear-gradient(90deg, #ff7675, #ffb5a2 60%); animation-delay: 0.2s; }
-    .layer2 { background: linear-gradient(90deg, #fab1a0, #ffd6a0 60%); animation-delay: 0.7s; }
-    .layer3 { background: linear-gradient(90deg, #ffeaa7, #fff8dc 60%); animation-delay: 1.2s; }
-
-    /* Candles */
-    .candles {
+      width: 180px;
+      height: 180px;
       display: flex;
+      align-items: flex-end;
       justify-content: center;
-      margin-top: -13px;
-      opacity: 0;
-      transition: opacity 1s;
+      pointer-events: none;
     }
-    .candles.visible { opacity: 1; }
+    .cakeBox.visible { opacity: 1; }
+    @media (max-width: 600px) {
+      .cakeBox {
+        width: 110px;
+        height: 110px;
+        top: 40vh;
+      }
+    }
 
-    .candle {
-      width: 7px; height: 22px; background: #fff;
-      margin: 0 5px;
-      position: relative;
-      border-radius: 2px 2px 6px 6px;
-      box-shadow: 0 0 2px #ff6;
-    }
-    .flame {
-      width: 8px; height: 13px;
-      background: radial-gradient(circle, #ffd700 60%, #ffab00 100%);
-      border-radius: 60% 60% 60% 60% / 80% 80% 50% 50%;
-      position: absolute;
-      top: -12px; left: -1px;
-      animation: flicker 0.4s infinite alternate;
+    /* Candles animated flames (inside SVG) */
+    .cake-candle-flame {
+      transform-origin: 50% 95%;
+      animation: flameFlicker 0.55s infinite alternate;
       opacity: 0;
       transition: opacity 0.3s;
-      filter: drop-shadow(0 0 6px #fff6);
+      filter: drop-shadow(0 0 5px #ffd);
     }
-
-    /* Flames appear one by one */
-    .flame.visible { opacity: 1; }
-
-    @keyframes flicker {
-      0%, 100% { transform: scale(1) rotate(-5deg); opacity: 1; }
-      50% { transform: scale(1.1) rotate(10deg); opacity: 0.75; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Message display area */
-    #message {
-      margin-top: 30px;
-      font-size: 2.1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      opacity: 0;
-      transition: opacity 1s;
-      z-index: 8;
-      text-shadow: 0 0 16px #fff, 0 0 4px #ffd;
-    }
-    #message.visible { opacity: 1; }
-
-    #rotatingMessages {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      min-height: 28px;
-      transition: opacity 0.5s;
-      z-index: 8;
-      text-shadow: 0 0 8px #fff, 0 0 3px #ffd;
+    .cake-candle-flame.visible { opacity: 1; }
+    @keyframes flameFlicker {
+      from { transform: scaleY(1) rotate(-2deg); opacity: 1; }
+      60% { transform: scaleY(1.08) scaleX(0.93) rotate(2deg); opacity: 0.82;}
+      100% { transform: scaleY(0.95) scaleX(1.18) rotate(-1deg); opacity: 0.95;}
     }
 
     /* Floating hearts & sparkles */
@@ -247,7 +241,6 @@
       80% { opacity: 1; }
       to { transform: translateY(-60px) scale(1.15); opacity: 0; }
     }
-
   </style>
 </head>
 <body>
@@ -283,31 +276,86 @@
 
 <!-- Main Content -->
 <div id="mainContent">
+  <!-- Message area is always above cake/cloud, centered -->
+  <div id="messageArea">
+    <div id="message">Happy Birthday Adelia!</div>
+    <div id="rotatingMessages"></div>
+  </div>
   <!-- Platform cloud (SVG) -->
   <div class="cloud-platform" id="cloudPlatform">
-    <!-- Cloud SVG for soft, dreamy look -->
-    <svg width="300" height="100" viewBox="0 0 300 100">
-      <ellipse cx="65" cy="65" rx="65" ry="35" fill="#fff" fill-opacity="0.95" />
-      <ellipse cx="150" cy="55" rx="90" ry="45" fill="#fff" fill-opacity="0.85" />
-      <ellipse cx="240" cy="75" rx="60" ry="28" fill="#fff" fill-opacity="0.90" />
-      <ellipse cx="200" cy="40" rx="50" ry="21" fill="#fff" fill-opacity="0.8" />
-      <ellipse cx="110" cy="38" rx="38" ry="18" fill="#fff" fill-opacity="0.75" />
+    <!-- SVG Cloud with a soft look -->
+    <svg width="100%" height="100%" viewBox="0 0 340 110">
+      <ellipse cx="65" cy="75" rx="65" ry="35" fill="#fff" fill-opacity="0.93" />
+      <ellipse cx="170" cy="65" rx="100" ry="48" fill="#fff" fill-opacity="0.87" />
+      <ellipse cx="265" cy="85" rx="65" ry="30" fill="#fff" fill-opacity="0.94" />
+      <ellipse cx="230" cy="50" rx="45" ry="17" fill="#fff" fill-opacity="0.8" />
+      <ellipse cx="110" cy="52" rx="32" ry="15" fill="#fff" fill-opacity="0.75" />
+      <ellipse cx="170" cy="90" rx="110" ry="25" fill="#fff" fill-opacity="0.58" />
     </svg>
   </div>
-  <!-- Cake on top of cloud -->
-  <div class="cake" id="cakeBox">
-    <div class="layer layer1"></div>
-    <div class="layer layer2"></div>
-    <div class="layer layer3"></div>
-    <div class="candles" id="candles">
-      <div class="candle"><div class="flame"></div></div>
-      <div class="candle"><div class="flame"></div></div>
-      <div class="candle"><div class="flame"></div></div>
-    </div>
+  <!-- Beautiful SVG Cake ON the cloud -->
+  <div class="cakeBox" id="cakeBox">
+    <svg id="cakeSVG" width="100%" height="100%" viewBox="0 0 180 180">
+      <!-- Plate shadow -->
+      <ellipse cx="90" cy="175" rx="60" ry="12" fill="#ddd" fill-opacity="0.40"/>
+      <!-- Plate -->
+      <ellipse cx="90" cy="170" rx="54" ry="10" fill="#fff8fa" stroke="#eee" stroke-width="1"/>
+      <!-- Bottom Layer -->
+      <ellipse cx="90" cy="135" rx="48" ry="28" fill="#f9c7b6" stroke="#e17350" stroke-width="2"/>
+      <rect x="42" y="95" width="96" height="40" rx="24" fill="#fcc6a0" stroke="#e17350" stroke-width="2"/>
+      <!-- Icing Drip -->
+      <path d="M50 108 Q57 114 65 108 Q75 115 80 108 Q90 120 100 108 Q110 118 120 108 Q130 116 138 108" fill="#fff4f0" />
+      <!-- Middle Layer -->
+      <ellipse cx="90" cy="105" rx="38" ry="18" fill="#ffe5e0" stroke="#e17350" stroke-width="2"/>
+      <rect x="52" y="80" width="76" height="28" rx="14" fill="#ffe5e0" stroke="#e17350" stroke-width="2"/>
+      <!-- Middle Icing Drip -->
+      <path d="M58 93 Q62 99 70 93 Q80 100 90 93 Q100 102 110 93 Q120 100 128 93" fill="#f9d3f2" />
+      <!-- Top Layer -->
+      <ellipse cx="90" cy="77" rx="28" ry="11" fill="#fff5bc" stroke="#e1ba45" stroke-width="2"/>
+      <rect x="62" y="56" width="56" height="22" rx="10" fill="#fffbe8" stroke="#e1ba45" stroke-width="2"/>
+      <!-- Top Icing Drip -->
+      <path d="M65 66 Q70 72 75 66 Q80 75 85 66 Q90 74 95 66 Q100 73 105 66 Q110 75 115 66" fill="#ffb0e0" />
+      <!-- Sprinkles -->
+      <ellipse cx="78" cy="102" rx="2" ry="1.1" fill="#ff6f91"/>
+      <ellipse cx="92" cy="98" rx="1.2" ry="2" fill="#5fffc2"/>
+      <ellipse cx="110" cy="108" rx="1.3" ry="1.3" fill="#ffc94d"/>
+      <ellipse cx="102" cy="84" rx="1.2" ry="1" fill="#00bfff"/>
+      <ellipse cx="120" cy="82" rx="1.2" ry="1.1" fill="#ff7f50"/>
+      <ellipse cx="80" cy="75" rx="1" ry="1.2" fill="#a0e9ff"/>
+      <!-- Cherries -->
+      <ellipse cx="80" cy="60" rx="2" ry="2" fill="#e34a6f" />
+      <ellipse cx="100" cy="58" rx="2" ry="2" fill="#b9123a" />
+      <!-- Candles (group) -->
+      <g id="cakeCandles">
+        <g class="cake-candle-group" id="candle1">
+          <rect x="78" y="42" width="5" height="20" rx="2.2" fill="#ffe1e0" stroke="#ffbaba" stroke-width="1.3"/>
+          <ellipse cx="80.5" cy="42" rx="2.6" ry="1.6" fill="#ffbaba" />
+          <ellipse cx="80.5" cy="42" rx="2" ry="1.2" fill="#fff"/>
+          <ellipse class="cake-candle-flame" cx="80.5" cy="37.5" rx="2.3" ry="4.5" fill="url(#flameGrad)" opacity="0"/>
+        </g>
+        <g class="cake-candle-group" id="candle2">
+          <rect x="88" y="37" width="5" height="25" rx="2.2" fill="#e0ffe1" stroke="#baffba" stroke-width="1.3"/>
+          <ellipse cx="90.5" cy="37" rx="2.6" ry="1.6" fill="#baffba" />
+          <ellipse cx="90.5" cy="37" rx="2" ry="1.2" fill="#fff"/>
+          <ellipse class="cake-candle-flame" cx="90.5" cy="32.5" rx="2.3" ry="4.5" fill="url(#flameGrad)" opacity="0"/>
+        </g>
+        <g class="cake-candle-group" id="candle3">
+          <rect x="98" y="42" width="5" height="20" rx="2.2" fill="#e0e8ff" stroke="#a7baff" stroke-width="1.3"/>
+          <ellipse cx="100.5" cy="42" rx="2.6" ry="1.6" fill="#a7baff" />
+          <ellipse cx="100.5" cy="42" rx="2" ry="1.2" fill="#fff"/>
+          <ellipse class="cake-candle-flame" cx="100.5" cy="37.5" rx="2.3" ry="4.5" fill="url(#flameGrad)" opacity="0"/>
+        </g>
+      </g>
+      <!-- Flames gradient -->
+      <defs>
+        <radialGradient id="flameGrad" cx="0.5" cy="0.4" r="0.8">
+          <stop offset="0%" stop-color="#fffbb9"/>
+          <stop offset="60%" stop-color="#ffe45b"/>
+          <stop offset="100%" stop-color="#ffb900" stop-opacity="0.75"/>
+        </radialGradient>
+      </defs>
+    </svg>
   </div>
-  <!-- Message area above cake -->
-  <div id="message">Happy Birthday Adelia!</div>
-  <div id="rotatingMessages"></div>
 </div>
 
 <!-- Music -->
@@ -334,7 +382,6 @@
     for (let i = 0; i < num; i++) {
       const star = document.createElement('div');
       star.className = 'star';
-      // Random placement and random size/animation
       const size = Math.random() * 2.4 + 1.2;
       const top = Math.random() * 90 + '%';
       const left = Math.random() * 100 + '%';
@@ -353,17 +400,10 @@
     if (!area) return;
     const star = document.createElement('div');
     star.className = 'shooting-star';
-    // Randomize start point near the top left
     const startX = Math.random() * window.innerWidth * 0.5;
     const startY = Math.random() * window.innerHeight * 0.5;
     star.style.top = startY + 'px';
     star.style.left = startX + 'px';
-    // Randomize direction
-    const dx = 400 + Math.random() * 200;
-    const dy = 120 + Math.random() * 120;
-    star.style.setProperty('--dx', dx + 'px');
-    star.style.setProperty('--dy', dy + 'px');
-    // Animation
     area.appendChild(star);
     setTimeout(() => { area.removeChild(star); }, 2500);
   }
@@ -381,7 +421,6 @@
       el = document.createElement('div');
       el.className = 'floating-sparkle';
     }
-    // Place randomly near center
     const left = 40 + Math.random() * 20 + '%';
     const top = 52 + Math.random() * 8 + '%';
     el.style.left = left;
@@ -400,7 +439,6 @@
       document.getElementById('countryPrompt').style.display = 'flex';
     }
   }
-
   function checkCountry() {
     const country = document.getElementById('countrySelect').value;
     if (country === "Indonesia") {
@@ -423,21 +461,11 @@
     // Animate cake in (after cloud appears)
     setTimeout(() => {
       document.getElementById('cakeBox').classList.add('visible');
-      // Fade in cake layers with animation
-      const layers = document.querySelectorAll('.cake .layer');
-      layers.forEach((layer, i) => {
-        setTimeout(() => { layer.style.opacity = 1; }, 250 + 350 * i);
-      });
     }, 1200);
 
-    // Fade in candles after cake
+    // Animate candles' flames one by one after cake visible
     setTimeout(() => {
-      document.getElementById('candles').classList.add('visible');
-      // Candle flames appear one by one
-      const flames = document.querySelectorAll('.candle .flame');
-      flames.forEach((flame, i) => {
-        setTimeout(() => { flame.classList.add('visible'); }, 400 * (i + 1));
-      });
+      revealCandleFlames();
     }, 2000);
 
     // Show birthday message
@@ -461,6 +489,20 @@
     setInterval(() => { spawnFloatingElement('sparkle'); }, 2200);
   }
 
+  // --- Animate SVG Candle Flames ---
+  function revealCandleFlames() {
+    // Select all .cake-candle-flame in cakeSVG
+    const svg = document.getElementById('cakeSVG');
+    if(!svg) return;
+    const flames = svg.querySelectorAll('.cake-candle-flame');
+    flames.forEach((flame, i) => {
+      setTimeout(() => {
+        flame.classList.add('visible');
+        flame.setAttribute('opacity', 1);
+      }, 400 * (i + 1));
+    });
+  }
+
   // --- Rotating personal lines ---
   function startRotatingMessages() {
     const msgBox = document.getElementById('rotatingMessages');
@@ -480,8 +522,6 @@
   window.onload = function() {
     createStars(80);
   };
-
-  // Responsive starfield on resize
   window.onresize = function() {
     createStars(80);
   };
